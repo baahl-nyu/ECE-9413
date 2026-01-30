@@ -1,2 +1,2 @@
 # ECE 9413 Assignments
-- Assignment 1: cd assignment1
+- Assignment 1: Number Theoretic Transform (NTT) in JAX
