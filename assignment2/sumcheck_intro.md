@@ -85,10 +85,14 @@ Because this polynomial is defined over **3** variables, the SumCheck protocol v
 We will call this resulting univariate polynomial $g_i(t)$. It must satisfy the consistency condition
 
 $$
-g_i(0) + g_i(1) = \text{claim}_{i-1}.
+g_i(0) + g_i(1) = \mathrm{claim}_{i-1}.
 $$
 
-For round $i = 1$, we set $\text{claim}_{i-1} = \text{claim}_{0} = S$ from above. Since the original sum includes both Boolean values of the chosen variable, the sum of the polynomial evaluated at $0$ and $1$ must equal the previous claim.
+For round $i = 1$, we set
+
+$$\mathrm{claim}_{i-1} = \mathrm{claim}_{0} = S$$
+
+from above. Since the original sum includes both Boolean values of the chosen variable, the sum of the polynomial evaluated at $0$ and $1$ must equal the previous claim.
 
 ---
 
@@ -130,7 +134,7 @@ which matches the claimed sum $S$.
 The verifier then samples a random field element $r_1$ and updates the claim to
 
 $$
-\text{claim}_1 = g_1(r_1).
+\mathrm{claim}_1 = g_1(r_1).
 $$
 
 At this point, the Boolean variable $x_1$ has been replaced by the random field value $r_1$. Suppose the verifier samples $r_1 = 8 \in \mathbb{F}_{17}$. We now **update the table along $x_1$** using
@@ -157,7 +161,7 @@ Pairwise updates:
 - $(4,5)$: $(5-4)\cdot 8 + 4 = 12$
 - $(6,7)$: $(7-6)\cdot 8 + 6 = 14$
 
-So the new table (now indexed by $(x_3,x_2)$) is:
+So the new table (now indexed by $(x_3,x_2)$ ) is:
 
 $$
 [8,10,12,14].
@@ -187,9 +191,9 @@ $$
 
 **What the Verifier computes:**
 
-- Checks round consistency: $g_1(0)+g_1(1)\stackrel{?}{=}\text{claim}_0$
+- Checks round consistency: $g_1(0)+g_1(1)\stackrel{?}{=}\mathrm{claim}_0$
 - Samples random challenge: $r_1\in\mathbb{F}_{17}$. (We provide these challenges in this assignment)
-- Updates claim: $\text{claim}_1=g_1(r_1)$
+- Updates claim: $\mathrm{claim}_1=g_1(r_1)$
 
 **Assignment note:** The claim updates and consistency checks are verifier-side, so you do **NOT** need to implement them.
 
@@ -233,10 +237,10 @@ $$
 Consistency check:
 
 $$
-g_2(0)+g_2(1)=3+7=10 \equiv \text{claim}_1 \pmod{17},
+g_2(0)+g_2(1)=3+7=10 \equiv \mathrm{claim}_1 \pmod{17},
 $$
 
-which matches $\text{claim}_1=10$ from Round 1.
+which matches $\mathrm{claim}_1=10$ from Round 1.
 
 Suppose the verifier samples $r_2 = 5 \in \mathbb{F}_{17}$. We now **update the table along $x_2$** using
 
@@ -317,10 +321,10 @@ $$
 Consistency check:
 
 $$
-g_3(0)+g_3(1)=1+5=6 \equiv \text{claim}_2 \pmod{17},
+g_3(0)+g_3(1)=1+5=6 \equiv \mathrm{claim}_2 \pmod{17},
 $$
 
-which matches $\text{claim}_2=6$ from Round 2.
+which matches $\mathrm{claim}_2=6$ from Round 2.
 
 
 The verifier privately samples a final random field element $r_3 = 11 \in \mathbb{F}_{17}$. The verifier then checks if $g_3(r_3) \equiv f(r_1, r_2, r_3)$: 
@@ -367,7 +371,7 @@ $$
 f_1(t) = \sum_{(x_2 \ldots x_n)\in{\lbrace 0,1\rbrace}^{n-1}} a(t,x_2,\ldots,x_n)\cdot b(t,x_2,\ldots,x_n) + c(t,x_2,\ldots,x_n).
 $$
 
-$f_1(t)$ is actually a degree-$2$ polynomial, so we need $3$ points to characterize it. Having $f_1(0)$ (sum of even entries) and $f_1(1) (sum of odd entries) only gives us 2 of the needed points. We need to compute $f_1(2)$ as well.
+$f_1(t)$ is actually a degree-2 polynomial, so we need $3$ points to characterize it. Having $f_1(0)$ (sum of even entries) and $f_1(1)$ (sum of odd entries) only gives us 2 of the needed points. We need to compute $f_1(2)$ as well.
 
 To compute $f_1(0), f_1(1), f_1(2)$, we do the following
 
@@ -388,7 +392,7 @@ for each pair of even and odd indices:
     f_2 += f_pair_two
 ```
 
-This shows the case for a degree-$2$ polynomial. In general, if we have a degree-$d$ polynomial, we need to compute the round evaluations $f_i(0), f_i(1), \ldots, f_i(d)$ using the procedure above.
+This shows the case for a degree-2 polynomial. In general, if we have a degree- $d$ polynomial, we need to compute the round evaluations $f_i(0), f_i(1), \ldots, f_i(d)$ using the procedure above.
  
 # Pseudocode example
 Below is pseudocode describing the full protocol end-to-end

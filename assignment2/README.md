@@ -17,13 +17,13 @@ There are two parties in SumCheck, a prover and a verifier. The protocol runs in
 - the prover sends evaluations of a univariate polynomial $g_i(t)$
   at points $t=0,1,\dots,d$ (where $d$ is the degree of the round polynomial),
 - the verifier checks the consistency condition
-  $$
-  g_i(0)+g_i(1)=\mathrm{claim}_{i-1},
-  $$
+
+$$g_i(0)+g_i(1)=\mathrm{claim}_{i-1},$$
+
 - the verifier samples a random challenge $r_i$ and computes
-  $$
-  \mathrm{claim}_i = g_i(r_i)
-  $$
+
+$$ \mathrm{claim}_i = g_i(r_i) $$
+
   by interpolating from the provided evaluations.
 
 Each round removes one Boolean variable from the remaining sum. After $n$
@@ -55,9 +55,8 @@ Notation clarification:
 - `a`, `b`, `c`, `d`, `e`, `g` are each multilinear polynomials over the same Boolean domain.
 - In code, each is provided as its own evaluation table, e.g. `eval_tables["a"]`.
 - Expressions like `a*b + c` mean pointwise composition:
-  $$
-  f(x) = a(x)b(x) + c(x) \pmod q.
-  $$
+
+$$f(x) = a(x)b(x) + c(x) \pmod q.$$
 
 
 ### Base polynomials (compulsory)
